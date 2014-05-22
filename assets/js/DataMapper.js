@@ -17,12 +17,13 @@
 			string: 'VARCHAR',
 			text: 'LONGTEXT',
 			int: 'INT',
+			bigint: 'BIGINT',
 			number:'INT',
 			float: 'FLOAT',
 			date: 'DATETIME'
 		},
-		_parseField: function( key, value ){
-				
+		//Transform key on field of table on SQL
+		_parseField: function( key, value ){	
 				var options = '';
 
 				if( HasSize.test(value) ){
@@ -44,14 +45,15 @@
 				
 				return key +' '+ this.fieldType[value] + options;
 		},
+		//Trasform object in SQL
 		_parserCreate: function( fields ){
 			var output = [];
 			for( field in fields ){
-				output.push(
-					this._parseField( field,(fields[field]).replace(/\s/g,'') ) );
+				output.push( this._parseField( field,(fields[field]).replace(/\s/g,'') ) );
 			}
 			return '( '+ output.join(', ') +' );';
 		},
+		//Helper to create table
 		create: function(name, fields, callback){
 			this.exe('CREATE TABLE IF NOT EXISTS ' + name + this._parserCreate( fields), [[]], callback); 
 		}
@@ -61,19 +63,85 @@
 		//If DB error
 		if(!DB) throw "Error to access DataBase";
 		//Auto instance
-		if( this.constructor != App.base ){
-			return new App.base(singular, plural);
+		if( this.constructor != Model ){
+			return new this.constructor(name, fields);
 		}
-		//Make table
-		DB.create(name, fields);
-
 		var self = this;
+		//table's name
 		self.name = name;
+		//fields to validate input of data
 		self._validate = fields;
-		self._queue = [];	
+		//queue of functions to execute
+		self._queue = [];
+		//data to save
+		self.data = {};	
 		self._set= function(key, value){ self.[key] = value };
-		self._goQueue = function(){	self._queue.shift.apply(this, arguments) };
-	}
-	
+		self._goQueue = function(){
+			var that = this,
+				args = arguments;
+			self._queue.forEach(function( fn ){
+				if( fn ){
+					fn.apply(that, args);
+				}
+			});
+		//Execute
+		DB.create(name, fields, self._goQueue);
+	};
+
+	Model.prototype = {
+		constructor: Model,
+		//New instance
+		create: function(){
+			//Code here
+		},
+		//Get an Set data to save
+		set: function(){
+			//Code here
+		},
+		get: function(){
+			//Code here
+		},
+		//Validate data
+		validate:function(){
+			//Core here
+		},
+		beforeValidate:function(){
+			//Core here
+		},
+		//To save data
+		beforeSave:function(){
+			//Core here
+		},
+		save:function(){
+			//Core here
+		},
+		afterSave:function(){
+			//Core here
+		},
+		//To Find
+		beforeFind:function(){
+			//Core here
+		},
+		find:function(){
+			//Core here
+		},
+		afterFind:function(){
+			//Core here
+		},
+		//to Remove
+		beforeRemove:function(){
+			//Core here
+		},
+		remove:function(){
+			//Core here
+		},
+		afterRemove:function(){
+			//Core here
+		},
+		//Update
+		update:function(){
+			//Core here
+		}
+	};
 
 })();
