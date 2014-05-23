@@ -7,12 +7,15 @@
 		incremt = /[+]/;
 
 	var DB = {
+		//Open dataBase
 		database: openDatabase("DB", "1.0", "Database to DataMapper", 10 * 1024 * 1024),
+		//init transaction
 		exe: function(sql, list, success, error){
 			this.database.transaction(function(transaction){
 				transaction.executeSql(sql, list, success, error);
 			});
 		},
+		//Type of fields
 		fieldType: {
 			string: 'VARCHAR',
 			text: 'LONGTEXT',
@@ -32,7 +35,7 @@
 						size = b;
 						return '';
 					});
-					options = '(' + (size || 5) + ')';
+					options = '(' + (size || 10) + ')';
 				}
 				if( incremt.test(value) ){
 					value = value.replace(incremt, '');
@@ -55,26 +58,31 @@
 		},
 		//Helper to create table
 		create: function(name, fields, callback){
-			this.exe('CREATE TABLE IF NOT EXISTS ' + name + this._parserCreate( fields), [[]], callback); 
+			this.exe('CREATE TABLE IF NOT EXISTS ' + name + this._parserCreate( fields ), [[]], callback); 
+		},
+		insert: function(name, fields, callback){
+			code
 		}
 	};
+
+
 	
 	function Model( name, fields ){
 		//If DB error
 		if(!DB) throw "Error to access DataBase";
 		//Auto instance
 		if( this.constructor != Model ){
-			return new this.constructor(name, fields);
+			return new Model(name, fields);
 		}
 		var self = this;
 		//table's name
 		self.name = name;
+		//data to save
+		self.data = {};	
 		//fields to validate input of data
 		self._validate = fields;
 		//queue of functions to execute
 		self._queue = [];
-		//data to save
-		self.data = {};	
 		self._set= function(key, value){ self.[key] = value };
 		self._goQueue = function(){
 			var that = this,
@@ -92,32 +100,35 @@
 		constructor: Model,
 		//New instance
 		create: function(){
-			//Code here
+			this.data = {};
 		},
 		//Get an Set data to save
-		set: function(){
-			//Code here
+		set: function(key, value){
+			this.data[key] = value;
 		},
-		get: function(){
-			//Code here
+		get: function(key){
+			return this.data[key];
 		},
 		//Validate data
 		validate:function(){
-			//Core here
+			this._validate.forEach(function(){
+
+			});this.data
 		},
 		beforeValidate:function(){
 			//Core here
 		},
 		//To save data
-		beforeSave:function(){
-			//Core here
+		beforeSave:undefined,
+		save:function( data ){
+			//Se tiver parâmetro data mescla com o que já tem
+			this.data = data ? $.extend(this.data, data): this.data;
+			//Antes de validar
+			if( this.beforeValidate && this.beforeValidate() && this.validate() ){
+				DB.
+			}
 		},
-		save:function(){
-			//Core here
-		},
-		afterSave:function(){
-			//Core here
-		},
+		afterSave:undefined,
 		//To Find
 		beforeFind:function(){
 			//Core here
