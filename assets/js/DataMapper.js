@@ -1,10 +1,11 @@
 (function(){
 
-	//REGEXP
+	//REGEXP to field type
 	var notNull = /\!/,
 		HasSize = /\[/,
 		getSize = /\[(\d+)\]/,
-		incremt = /[+]/;
+		incremt = /[+]/,
+		cleaner = /[+!\[\]0-9]/;
 
 	var DB = {
 		//Open dataBase
@@ -61,7 +62,7 @@
 			this.exe('CREATE TABLE IF NOT EXISTS ' + name + this._parserCreate( fields ), [[]], callback); 
 		},
 		insert: function(name, fields, callback){
-			code
+			//code
 		}
 	};
 
@@ -111,9 +112,30 @@
 		},
 		//Validate data
 		validate:function(){
-			this._validate.forEach(function(){
+			var self = this,
+				validation = true;
+			this._validate.forEach(function( field, type ){
+				//Field not null
+				if( notNull.test(type) ){
+					if( !self.data.hasOwnProperty(field) || self.data[field] === null || self.data[field] === undefined ){
+						validation = false;
+				}
+				//If field has a size
+				if( HasSize.test( type ) ){
+					var size = Number( type.match(getSize)[1] );
+					if( self.data[field].length > size ){
+						validation = false;
+					}
+				}
+				//Clean field type
+				type = type.replace(cleaner, '');
+				if( (type == 'string' || type == 'text') && !(self.data[field].constructor == String) )
+					validation = false;
+				if( (type == 'int' || type == 'float' || type == 'number') && !(self.data[field].constructor == Number) )
+					validation = false;
+			});
 
-			});this.data
+			return validation;
 		},
 		beforeValidate:function(){
 			//Core here
@@ -124,8 +146,14 @@
 			//Se tiver parâmetro data mescla com o que já tem
 			this.data = data ? $.extend(this.data, data): this.data;
 			//Antes de validar
-			if( this.beforeValidate && this.beforeValidate() && this.validate() ){
-				DB.
+			if( this.beforeValidate ) this.beforeValidate();
+			if( this.validate() ){
+				if( this.beforeSave ) this.afterSave();
+				var self = this;
+				DB.insert(this.name, this.data, function( saved ){
+					this.data = saved;
+					if( self.afterSave ) self.afterSave();
+				});
 			}
 		},
 		afterSave:undefined,
