@@ -84,7 +84,7 @@
 		self._validate = fields;
 		//queue of functions to execute
 		self._queue = [];
-		self._set= function(key, value){ self.[key] = value };
+		self._set= function(key, value){ self[key] = value };
 		self._goQueue = function(){
 			var that = this,
 				args = arguments;
@@ -93,6 +93,7 @@
 					fn.apply(that, args);
 				}
 			});
+		}
 		//Execute
 		DB.create(name, fields, self._goQueue);
 	};
@@ -182,5 +183,4 @@
 			//Core here
 		}
 	};
-
 })();
