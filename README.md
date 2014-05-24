@@ -1,6 +1,3 @@
-Modular
-=======
-
-[![Modular](assets/img/logo.png)]
-
+![Modular](assets/img/logo.png)
+===============================
 Sistema de automação escolar
