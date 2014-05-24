@@ -1,4 +1,6 @@
-Meruem
-======
+Modular
+=======
 
-Aumatização escolar
+[![Modular](assets/img/logo.png)]
+
+Sistema de automação escolar
