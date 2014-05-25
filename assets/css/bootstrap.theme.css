@@ -17,12 +17,13 @@
 }
 .sidebar .nav li a {
 	color:#333;
-	font-size: 20px;
+	font-size: 19px;
 }
 .sidebar .nav .active a {
 	color:#fff;
-	background:#444;
+	background:#4c00d1;
 }
+
 .sidebar .nav .glyphicon { margin-right: 10px }
 /* Sidebar navigation */
 .nav-sidebar {
