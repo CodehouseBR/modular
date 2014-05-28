@@ -12,22 +12,21 @@
 		self.name = name;
 		//data to save
 		self.data = {};	
+		//events 
+		self._events = {
+			after:{
+				save:[],
+				find:[],
+				remove:[]
+			},
+			before:{
+				save:[], 
+				find:[],
+				remove:[]
+			}
+		};
 		//fields to validate input of data
-		self._validate = fields;
-		//queue of functions to execute
-		self._queue = [];
-		self._set= function(key, value){ self[key] = value };
-		self._goQueue = function(){
-			var that = this,
-				args = arguments;
-			self._queue.forEach(function( fn ){
-				if( fn ){
-					fn.apply(that, args);
-				}
-			});
-		}
-		//Execute
-		DB.create(name, fields, self._goQueue);
+		self._validation = fields || false;
 	};
 
 	Resource.prototype = {
@@ -35,6 +34,14 @@
 		//New instance
 		create: function(){
 			this.data = {};
+		},
+		callEvent:function(type, name, context, args){
+			var event = this._events[type][name];
+			if( event.length > 0 ){
+				event.forEach(function(action){
+					action.apply(context, args);
+				});
+			} else return true;
 		},
 		//Get an Set data to save
 		set: function(key, value){
@@ -78,52 +85,34 @@
 
 			return validation;
 		},
-		beforeValidate:function(){
-			//Core here
-		},
+		//After events
 		after: function( event, action ){
-			//Here
+			if( this.events.after[event] ){
+				(this.events.after[event]).push(action);
+			} else return false;
+		},
+		//Before events
+		before:function( event, action ){
+			if( this.events.before[event] ){
+				(this.events.before[event]).push(action);
+			} else return false;
 		},
 		//To save data
-		beforeSave:undefined,
 		save:function( data ){
-			//Se tiver parâmetro data mescla com o que já tem
+			var self = this;
+			//if argument exists, extend data;
 			this.data = data ? $.extend(this.data, data): this.data;
-			//Antes de validar
-			if( this.beforeValidate ) this.beforeValidate();
-			if( this.validate() ){
-				if( this.beforeSave ) this.afterSave();
-				var self = this;
-				DB.insert(this.name, this.data, function( saved ){
-					this.data = saved;
-					if( self.afterSave ) self.afterSave();
+			//saving
+			if( this.validate() && this.callEvent('before', 'save') ){
+				db.put(this.data, function(){
+					self.callEvent('after','save', arguments);
 				});
 			}
-		},
-		afterSave:undefined,
-		//To Find
-		beforeFind:function(){
-			//Core here
-		},
-		find:function(){
-			//Core here
-		},
-		afterFind:function(){
-			//Core here
-		},
-		//to Remove
-		beforeRemove:function(){
-			//Core here
-		},
-		remove:function(){
-			//Core here
-		},
-		afterRemove:function(){
-			//Core here
 		},
 		//Update
 		update:function(){
 			//Core here
 		}
 	};
+	
 })(window, new PouchDB('modular') );
