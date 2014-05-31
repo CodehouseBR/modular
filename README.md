@@ -1,3 +1,5 @@
-![Modular](assets/img/logo.png)
+![Modular](img/logo.png)
 ===============================
-Sistema de automação escolar
+Sistema de automação escolar multiplataforma
+
+Chega de tanta papelada!
