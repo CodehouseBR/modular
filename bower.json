@@ -1,0 +1,23 @@
+{
+  "name": "Modular",
+  "version": "0.0.0",
+  "homepage": "https://github.com/CodehouseBR/modular",
+  "description": "Sistema de automação escolar",
+  "authors": [
+    "Judson Silva & Gabriel Rubens"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "pouchdb": "~2.2.2",
+    "bootstrap": "~3.1.1"
+  }
+}
