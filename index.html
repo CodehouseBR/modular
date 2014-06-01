@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="modular">
 <head>
 	<meta charset='utf-8'>
 	<title>Modular | Automação Escolar</title>
 	<!--Include libs -->
-	<link rel='stylesheet' type='text/css' href='lib/bootstrap/dist/css/bootstrap.min.css'>
 	<script src='lib/pouchdb/dist/pouchdb-nightly.min.js'></script>
 	<script src='lib/jquery/dist/jquery.min.js'></script>
 	<script src='lib/handlebars/handlebars.min.js'></script>
+	<link rel='stylesheet' type='text/css' href='lib/bootstrap/dist/css/bootstrap.min.css'>
 	<!-- Load src -->
 	<link rel='stylesheet' type='text/css' href='css/bootstrap.theme.css'>
 	<script src='src/resource.js'></script>
 	<script src='src/view.js'></script>
 </head>
-<body>
+<body ng-init="tab = 'students-tab'">
 	<div class='container-fluid'>
 		<div class='row'>
 			<!-- Barra lateral -->
@@ -51,10 +51,10 @@
 						</div>
 						<div class='navbar-collapse collapse'>
 							<ul class='nav navbar-nav navbar-right'>
-								<li><a href='#'>Turmas</a></li>
-								<li><a href='#'>Alunos</a></li>
-								<li><a href='#'>Professores</a></li>
-								<li><a href='#'>Horários</a></li>
+								<li ng-click="tab='classes-tab'"><a href='#'>Turmas</a></li>
+								<li ng-click="tab='students-tab'"><a href='#'>Alunos</a></li>
+								<li ng-click="tab='teachers-tab'"><a href='#'>Professores</a></li>
+								<li ng-click="tab='schedules-tab'"><a href='#'>Horários</a></li>
 								<li class='dropdown'>
 									<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Ações</a>
 									<ul class='dropdown-menu'>
@@ -70,9 +70,9 @@
 					</div>
 				</div>
 				<!-- Content -->
-				<div class='container-fluid'>
-					<div class='content'>
-						<h1 class='page-header'>Dashboard</h1>
+				<div class='container-fluid' ng-controller="StudentsController as students" ng-show="tab === 'students-tab'">
+					<div id='container-content' class='content'>
+						<h1 class='page-header'>Alunos</h1>
 						<div class='row placeholders'>
 							<div class='col-xs-6 col-sm-3 placeholder'>
 								<img data-src='holder.js/200x200/auto/sky' class='img-responsive' alt='Generic placeholder thumbnail'>
@@ -95,41 +95,33 @@
 								<span class='text-muted'>Something else</span>
 							</div>
 						</div>
-						<h2 class='sub-header'>Section title</h2>
-						<div class='table-responsive'>
-							<table class='table table-striped'>
-								<thead>
-									<tr>
-									<th>#</th>
-									<th>Header</th>
-									<th>Header</th>
-									<th>Header</th>
-									<th>Header</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-									<td>1,001</td>
-									<td>Lorem</td>
-									<td>ipsum</td>
-									<td>dolor</td>
-									<td>sit</td>
-									</tr>
-									<tr>
-									<td>1,002</td>
-									<td>amet</td>
-									<td>consectetur</td>
-									<td>adipiscing</td>
-									<td>elit</td>
-									</tr>
-								</tbody>
-							</table>
+
+						<h2 class='sub-header'>Lista de alunos</h2>
+						<div>
+							<ul>
+								<li ng-repeat="student in students.students">
+									<h3>{{student.name}}</h3>
+								</li>
+							</ul>
 						</div>
+					</div>
+				</div>
+
+				<div class='container-fluid' ng-controller="TeachersController as students" ng-show="tab === 'teachers-tab'">
+					<div class='content'>
+						<h3>{{tab}}</h3>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script src='lib/pouchdb/dist/pouchdb-nightly.min.js'></script>
+<script src='lib/jquery/dist/jquery.min.js'></script>
+<script src='lib/angular/angular.min.js'></script>
+<script src='lib/angular-route/angular-route.min.js'></script>
+<script src='src/app.js'></script>
+<script src='src/resource.js'></script>
 </body>
 </html>
