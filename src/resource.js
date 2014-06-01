@@ -31,9 +31,12 @@
 
 	Resource.prototype = {
 		constructor: Resource,
+		_makeId: function(){
+			return ((( new Date() ).getTime() + Math.random() ) * 10000 ).toString();
+		},
 		//New instance
 		create: function(){
-			this.data = {};
+			this.data = { _id: this._makeId() };
 		},
 		callEvent:function(type, name, context, args){
 			var event = this._events[type][name];
@@ -114,5 +117,7 @@
 			//Core here
 		}
 	};
+
+	window.Resource = Resource;
 	
 })(window, new PouchDB('modular') );
