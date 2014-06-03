@@ -1,4 +1,4 @@
-(function(window, db){
+(function(window, $, db){
 	
 	function Resource( name, fields ){
 		//If DB error
@@ -11,7 +11,9 @@
 		//table's name
 		self.name = name;
 		//data to save
-		self.data = {};	
+		self.data = {};
+		//instance of DB
+		self.db = db;	
 		//events 
 		self._events = {
 			after:{
@@ -31,12 +33,15 @@
 
 	Resource.prototype = {
 		constructor: Resource,
+		_findTypes:{
+			//Here map functions
+		},
 		_makeId: function(){
 			return ((( new Date() ).getTime() + Math.random() ) * 10000 ).toString();
 		},
 		//New instance
 		create: function(){
-			this.data = { _id: this._makeId() };
+			this.data = { _id: this._makeId(), $type: this.name };
 		},
 		callEvent:function(type, name, context, args){
 			var event = this._events[type][name];
@@ -64,40 +69,31 @@
 		},
 		//Validate data
 		validate:function(){
+			if(!this._validation) return true;
+
 			var self = this,
 				validation = true;
-			this._validate.forEach(function( field, type ){
-				//Field not null
-				if( notNull.test(type) ){
-					if( !self.data.hasOwnProperty(field) || self.data[field] === null || self.data[field] === undefined )
+			
+			this._validation.forEach(function( key, type ){
+				if( key && type ){
+					var value = self.data[key];
+					if( value && value.constructor != type )
 						validation = false;
 				}
-				//If field has a size
-				if( HasSize.test( type ) ){
-					var size = Number( type.match(getSize)[1] );
-					if( self.data[field].length > size )
-						validation = false;
-				}
-				//Clean field type
-				type = type.replace(cleaner, '');
-				if( (type == 'string' || type == 'text') && !(self.data[field].constructor == String) )
-					validation = false;
-				if( (type == 'int' || type == 'float' || type == 'number') && !(self.data[field].constructor == Number) )
-					validation = false;
 			});
 
 			return validation;
 		},
 		//After events
 		after: function( event, action ){
-			if( this.events.after[event] ){
-				(this.events.after[event]).push(action);
+			if( this._events.after[event] ){
+				(this._events.after[event]).push(action);
 			} else return false;
 		},
 		//Before events
 		before:function( event, action ){
-			if( this.events.before[event] ){
-				(this.events.before[event]).push(action);
+			if( this._events.before[event] ){
+				(this._events.before[event]).push(action);
 			} else return false;
 		},
 		//To save data
@@ -106,11 +102,31 @@
 			//if argument exists, extend data;
 			this.data = data ? $.extend(this.data, data): this.data;
 			//saving
-			if( this.validate() && this.callEvent('before', 'save') ){
-				db.put(this.data, function(){
-					self.callEvent('after','save', arguments);
+			if( this.validate() && this.callEvent('before', 'save', self, [self.data]) ){
+				console.log(self.data);
+				this.db.put(self.data, function(err,resp){
+					console.log('Saved!', err, resp);
+					self.callEvent('after','save', self, [resp]);
 				});
 			}
+		},
+		find: function(options, callback){
+			var name = this.name;
+			//options.condition
+			this.db.query(function(doc, emit){
+				var get = true;
+				if( options.condition ){
+					for( key in options.condition){
+						if( doc[key] != options.condition[key] )
+							get = false;
+					}
+				}
+				if( options.fields ){
+					var fields = {};
+					
+				}
+				if( get && doc.$type == name ) emit(doc);
+			}, callback);
 		},
 		//Update
 		update:function(){
@@ -120,4 +136,4 @@
 
 	window.Resource = Resource;
 	
-})(window, new PouchDB('modular') );
+})(window, jQuery, new PouchDB('modular') );

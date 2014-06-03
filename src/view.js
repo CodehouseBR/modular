@@ -5,7 +5,7 @@
 		var local = local.split('\\');
 		return new Handlebars.SafeString( View( local[0] )._getView( [local[1] ])( context ) );
 	});
-
+	
 	function View( name ){
 		if( this.constructor != View ){
 			return new View(name);
@@ -28,9 +28,11 @@
 			this.static.container.html(compiled);
 		}
 	};
+	//Current view
 	View.now = false;
+	//Container to turn view
 	View.container = $('#container-content');
-
+	//Access global
 	window.View = View;
 
 })( jQuery, Handlebars, require('fs'));

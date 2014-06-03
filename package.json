@@ -1,9 +1,31 @@
 {
-  "name": "meruem",
+  "name": "modular",
+  "version": "0.0.0",
+  "description": "Sistema de automação escolar",
   "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CodehouseBR/modular.git"
+  },
+  "author": "Judson Silva & Gabriel Rubens",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodehouseBR/modular/issues"
+  },
   "window": {
-    //"toolbar": false,
+    "toolbar": true,
     "width": 1024,
     "height": 768
+  },
+  "homepage": "https://github.com/CodehouseBR/modular",
+  "devDependencies": {
+    "gulp": "^3.7.0",
+    "gulp-concat": "^2.2.0",
+    "gulp-jshint": "^1.6.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.3.0"
   }
 }

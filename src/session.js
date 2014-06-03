@@ -62,7 +62,7 @@
 			});
 		}
 	}
-
+	//Access Global
 	window.Session = new Session();
 
 })( jQuery );
