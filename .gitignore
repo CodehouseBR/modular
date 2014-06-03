@@ -1,3 +1,5 @@
-lib/**/*
+lib/
 
-nodemodules/**/*
+node_modules/
+
+*.*~
