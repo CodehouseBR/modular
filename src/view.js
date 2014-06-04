@@ -1,9 +1,9 @@
-(function($, Handlebars, fs){
+(function($, hbs, _ ){
 
 	//Make helper to include
-	Handlebars.registerHelper('include', function( local, context){
+	hbs.registerHelper('include', function( local, context){
 		var local = local.split('\\');
-		return new Handlebars.SafeString( View( local[0] )._getView( [local[1] ])( context ) );
+		return new hbs.SafeString( View( local[0] )._getView( [local[1] ])( context ) );
 	});
 	
 	function View( name ){
@@ -17,22 +17,21 @@
 		constructor: View,
 		//Return function to compile selected file
 		_getView: function( name ){
-			var content = fs.readFileSync('view/'+this.resource+'/'+name+'.hbs', 'utf-8');
-			return Handlebars.compile(content);
+			//Get file contents and compile to Handlebars
+			return hbs.compile( _.file.read('view/'+this.resource+'/'+name+'.hbs') );
 		},
-
 		//Show this view with this context on container
 		show: function( name, context ){
 			var compiled = this._getView(name)(context);
-			this.static.now = name;
+			this.static.current = name;
 			this.static.container.html(compiled);
 		}
 	};
-	//Current view
-	View.now = false;
+	//Current view showed
+	View.current = false;
 	//Container to turn view
 	View.container = $('#view-container');
 	//Access global
 	window.View = View;
 
-})( jQuery, Handlebars, require('fs'));
+})( jQuery, Handlebars, Helper);

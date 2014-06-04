@@ -59,6 +59,7 @@
 				this.data = $.extend(this.data, key);
 			else this.data[key] = value;
 		},
+		//Get data on this 
 		get: function(key){
 			if( key.constructor == Array ){
 				var toReturn = {},
@@ -112,6 +113,7 @@
 				});
 			}
 		},
+		//Search values
 		find: function(options, callback){
 			var name = this.name;
 			//options.condition

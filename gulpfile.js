@@ -1,42 +1,39 @@
-//Initialize modules
-var gulp = require('gulp');
-var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
- 
-//Codes directory
-var codes = 'src/*.js';
-var libs = './lib/*/dist/*.js'
+var gulp = require('gulp'),
+	domSrc = require('gulp-dom-src'),
+	concat = require('gulp-concat'),
+	cssmin = require('gulp-cssmin'),
+	uglify = require('gulp-uglify'),
+	htmlmin = require('gulp-htmlmin'),
+	cheerio = require('gulp-cheerio');
 
-//To validade code syntax
-gulp.task('validate', function() {
-	gulp.src(files)
-		.pipe(jshint())
-		.pipe(jshint.reporter('default'));
+gulp.task('css', function() {
+	return domSrc({file:'index.html',selector:'link',attribute:'href'})
+		.pipe(concat('style.min.css'))
+		.pipe(cssmin())
+		.pipe(gulp.dest('css/'));
 });
- 
-//Criamos outra tarefa com o nome 'dist'
-gulp.task('dist', function() {
- 
-// Carregamos os arquivos novamente
-// E rodamos uma tarefa para concatenação
-// Renomeamos o arquivo que sera minificado e logo depois o minificamos com o `uglify`
-// E pra terminar usamos o `gulp.dest` para colocar os arquivos concatenados e minificados na pasta build/
-gulp.src(files)
-.pipe(concat('./src'))
-.pipe(rename('app.min.js'))
-.pipe(uglify())
-.pipe(gulp.dest('./src'));
+
+gulp.task('js', function() {
+	return domSrc({file:'index.html',selector:'script',attribute:'src'})
+		.pipe(concat('app.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('src/'));
 });
- 
-//Criamos uma tarefa 'default' que vai rodar quando rodamos `gulp` no projeto
-gulp.task('default', function() {
- 
-// Usamos o `gulp.run` para rodar as tarefas
-// E usamos o `gulp.watch` para o Gulp esperar mudanças nos arquivos para rodar novamente
-gulp.run('lint', 'dist');
-gulp.watch(files, function(evt) {
-gulp.run('lint', 'dist');
+
+gulp.task('html', function() {
+	return gulp.src('index.html')
+		.pipe(concat('index.min.html'))
+		.pipe(cheerio(function ($) {
+			$('script').remove();
+			$('link').remove();
+			$('body').append('<script src="src/app.min.js"></script>');
+			$('head').append('<link rel="stylesheet" href="css/style.min.css">');
+		}))
+		.pipe(htmlmin({ 
+			collapseWhitespace: true,
+			removeComments: true
+		}))
+		.pipe(gulp.dest('.'));
 });
-});
+
+gulp.task('compress',['css','js','html']);
