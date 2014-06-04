@@ -4,7 +4,15 @@
   "homepage": "https://github.com/CodehouseBR/modular",
   "description": "Sistema de automação escolar",
   "authors": [
-    "Judson Silva & Gabriel Rubens"
+    {
+      "name": "Gabriel Rubens",
+      "email": "grsabreu@gmail.com"
+    },
+    {
+      "name": "Judson Barroso",
+      "email": "judsonbarroso@gmail.com",
+      "url": "judsonsilva.com.br"
+    }
   ],
   "license": "MIT",
   "private": true,

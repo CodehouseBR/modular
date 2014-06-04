@@ -1,4 +1,4 @@
-#bower components
-lib/**/*
-#npm dependencies
-node_modules/**/*
+
+lib/
+node_modules/
+*.*~
