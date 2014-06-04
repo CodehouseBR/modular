@@ -31,7 +31,7 @@
 	//Current view
 	View.now = false;
 	//Container to turn view
-	View.container = $('#container-content');
+	View.container = $('#view-container');
 	//Access global
 	window.View = View;
 

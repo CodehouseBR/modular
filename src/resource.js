@@ -122,8 +122,7 @@
 					}
 				}
 				if( options.fields ){
-					var fields = {};
-					
+					//Code here
 				}
 				if( get && doc.$type == name ) emit(doc);
 			}, callback);

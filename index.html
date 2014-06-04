@@ -22,10 +22,7 @@
 				<!-- <ul class='nav nav-sidebar'>
 					<li><a href=''>Nav item</a></li>
 					<li><a href=''>Nav item again</a></li>
-				</ul>
-				<ul class='nav nav-sidebar'>
-					<li><a href=''>Nav item again</a></li>
-				</ul> -->
+				</ul>-->
 			</div>
 			<!-- Parte principal -->
 			<div class='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
@@ -62,7 +59,7 @@
 				</div>
 				<!-- Content -->
 				<div class='container-fluid' ng-controller="StudentsController as students" ng-show="tab === 'students-tab'">
-					<div id='container-content' class='content'>
+					<div id='view-container' class='content'>
 						<h1 class='page-header'>Alunos</h1>
 						<div class='row placeholders'>
 							<div class='col-xs-6 col-sm-3 placeholder'>
@@ -95,12 +92,6 @@
 								</li>
 							</ul>
 						</div>
-					</div>
-				</div>
-
-				<div class='container-fluid' ng-controller="TeachersController as students" ng-show="tab === 'teachers-tab'">
-					<div class='content'>
-						<h3>{{tab}}</h3>
 					</div>
 				</div>
 			</div>
