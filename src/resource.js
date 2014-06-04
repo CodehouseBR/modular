@@ -1,4 +1,4 @@
-(function(window, $, db){
+(function(window, $, View, db){
 	
 	function Resource( name, fields ){
 		//If DB error
@@ -13,7 +13,9 @@
 		//data to save
 		self.data = {};
 		//instance of DB
-		self.db = db;	
+		self.db = db;
+		//the view
+		self.view = new View(name);
 		//events 
 		self._events = {
 			after:{
@@ -135,4 +137,4 @@
 
 	window.Resource = Resource;
 	
-})(window, jQuery, new PouchDB('modular') );
+})(window, jQuery, View, new PouchDB('modular') );

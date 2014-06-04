@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html ng-app='modular'>
+<html>
 <head>
 	<meta charset='utf-8'>
 	<title>Modular | Automação Escolar</title>
 </head>
-<body ng-init="tab = 'students-tab'">
+<body>
 	<div class='container-fluid'>
 		<div class='row'>
 			<!-- Barra lateral -->
@@ -39,10 +39,10 @@
 						</div>
 						<div class='navbar-collapse collapse'>
 							<ul class='nav navbar-nav navbar-right'>
-								<li ng-click="tab='classes-tab'"><a href='#'>Turmas</a></li>
-								<li ng-click="tab='students-tab'"><a href='#'>Alunos</a></li>
-								<li ng-click="tab='teachers-tab'"><a href='#'>Professores</a></li>
-								<li ng-click="tab='schedules-tab'"><a href='#'>Horários</a></li>
+								<li><a href='#'>Turmas</a></li>
+								<li><a href='#'>Alunos</a></li>
+								<li><a href='#'>Professores</a></li>
+								<li><a href='#'>Horários</a></li>
 								<li class='dropdown'>
 									<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Ações</a>
 									<ul class='dropdown-menu'>
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				<!-- Content -->
-				<div class='container-fluid' ng-controller="StudentsController as students" ng-show="tab === 'students-tab'">
+				<div class='container-fluid'>
 					<div id='view-container' class='content'>
 						<h1 class='page-header'>Alunos</h1>
 						<div class='row placeholders'>
@@ -87,9 +87,7 @@
 						<h2 class='sub-header'>Lista de alunos</h2>
 						<div>
 							<ul>
-								<li ng-repeat="student in students.students">
-									<h3>{{student.name}}</h3>
-								</li>
+								<li><h3>Estudante</h3></li>
 							</ul>
 						</div>
 					</div>
@@ -106,8 +104,8 @@
 <link rel='stylesheet' type='text/css' href='lib/bootstrap/dist/css/bootstrap.min.css'>
 <!-- The magic -->
 <link rel='stylesheet' type='text/css' href='css/bootstrap.theme.css'>
-<script src='src/resource.js'></script>
 <script src='src/view.js'></script>
+<script src='src/resource.js'></script>
 <script src='src/session.js'></script>
 <script type='text/javascript'>
 View('student').show('list', { 
