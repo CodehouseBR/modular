@@ -3,10 +3,7 @@
 	function Resource( name, fields ){
 		//If DB error
 		if(!db) throw "Error to access DataBase";
-		//Auto instance
-		if( this.constructor != Resource ){
-			return new Resource(name, fields);
-		}
+		//Atributes
 		var self = this;
 		//table's name
 		self.name = name;
@@ -15,20 +12,9 @@
 		//instance of DB
 		self.db = db;
 		//the view
-		self.view = new View(name);
-		//events 
-		self._events = {
-			after:{
-				save:[],
-				find:[],
-				remove:[]
-			},
-			before:{
-				save:[], 
-				find:[],
-				remove:[]
-			}
-		};
+		self.view = new View(name, self);
+		//events
+		self.events = { after:{}, before:{}, on:{} };
 		//fields to validate input of data
 		self._validation = fields || false;
 	};
@@ -44,10 +30,11 @@
 		//New instance
 		create: function(){
 			this.data = { _id: this._makeId(), $type: this.name };
+			this.callEvent('after','create',this, this.data);
 		},
-		callEvent:function(type, name, context, args){
-			var event = this._events[type][name];
-			if( event.length > 0 ){
+		callEvent:function(when, name, context, args){
+			var event = this.events[when][name];
+			if( event && event.length > 0 ){
 				event.forEach(function(action){
 					action.apply(context, args);
 				});
@@ -87,17 +74,13 @@
 
 			return validation;
 		},
-		//After events
-		after: function( event, action ){
-			if( this._events.after[event] ){
-				(this._events.after[event]).push(action);
-			} else return false;
-		},
-		//Before events
-		before:function( event, action ){
-			if( this._events.before[event] ){
-				(this._events.before[event]).push(action);
-			} else return false;
+		//Events: after, before or on action, callback
+		event:function(when, name, action){
+			//If not created, make a list
+			if( !this.events[when].hasOwnProperty(name) ){
+				this.events[when][name] = [];
+			}
+			this.events[when][name].push(action);
 		},
 		//To save data
 		save:function( data ){
@@ -119,6 +102,7 @@
 			//options.condition
 			this.db.query(function(doc, emit){
 				var get = true;
+				console.log(doc);
 				if( options.condition ){
 					for( key in options.condition){
 						if( doc[key] != options.condition[key] )
