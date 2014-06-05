@@ -102,7 +102,6 @@
 			//options.condition
 			this.db.query(function(doc, emit){
 				var get = true;
-				console.log(doc);
 				if( options.condition ){
 					for( key in options.condition){
 						if( doc[key] != options.condition[key] )
