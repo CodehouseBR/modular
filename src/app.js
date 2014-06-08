@@ -6,7 +6,7 @@ Student = new Resource('student',{
 	birthdate: Date
 });
 SchoolClass = new Resource('schoolclass',{
-
+		
 });
 Teacher = new Resource('teacher',{
 
