@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='modular'>
 <head>
 	<meta charset='utf-8'>
 	<title>Modular | Automação Escolar</title>
@@ -14,12 +14,12 @@
 					<span class='icon-bar'></span>
 					<span class='icon-bar'></span>
 				</button>
-				<a class='navbar-brand' href='#'>Modular</a>
+				<a class='navbar-brand' ui-sref='home'>Modular</a>
 			</div>
 			<div class='collapse navbar-collapse' id='navbar-links'>
 				<ul class='nav navbar-nav'>
 					<li class='active'><a href='#'>Início</a></li>
-					<li><a href='#'>Alunos</a></li>
+					<li><a ui-sref='students'>Alunos</a></li>
 					<li><a href='#'>Turmas</a></li>
 					<li><a href='#'>Professores</a></li>
 					<li><a href='#'>Configurações</a></li>
@@ -30,58 +30,13 @@
 	</nav>
 	<header>
 		<div class='jumbotron'>
-			<h1>Modular <p class='lead'>Bem vindo</p></h1>
+			<h1>Modular <p class='lead'>Bem-vindo</p></h1>
 		</div>
 	</header>
 	<div id='content-index' class='content'>
-		<div class='container-fluid'>
-			<div class='row'>
-				<div class='col-md-2'>
-					<div class='circle'>
-						<button class='btn-circle'>
-							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
-						</button>
-					</div>
-				</div>
-				<div class='col-md-2'>
-					<div class='circle'>
-						<button class='btn-circle'>
-							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
-						</button>
-					</div>
-				</div>
-				<div class='col-md-2'>
-					<div class='circle'>
-						<button class='btn-circle'>
-							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
-						</button>
-					</div>
-				</div>
-				<div class='col-md-2'>
-					<div class='circle'>
-						<button class='btn-circle'>
-							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
-						</button>
-					</div>
-				</div>
-				<div class='col-md-2'>
-					<div class='circle'>
-						<button class='btn-circle'>
-							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
-						</button>
-					</div>
-				</div>
-				<div class='col-md-2'>
-					<div class='circle'>
-						<button class='btn-circle'>
-							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div ui-view></div>
 	</div>
-	
+
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
 <script src="lib/jquery/dist/jquery.js"></script>
@@ -98,8 +53,6 @@
 <!-- endbuild -->
 
 <!-- build:js scripts/app.js -->
-<script src='src/helper.js'></script>
-<script src='src/view.js'></script>
 <script src='src/resource.js'></script>
 <script src='src/session.js'></script>
 <script src='src/user.js'></script>
