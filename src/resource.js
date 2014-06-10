@@ -55,19 +55,18 @@
 				return toReturn;
 			} else return this.data[key];
 		},
-		//Validate data
-		validate:function(){
-			if(!this._validation) return true;
+
+		// Data validation
+		validate: function(){
+			if( !this._validation ) return true;
 
 			var self = this,
 				validation = true;
 			
-			this._validation.forEach(function( key, type ){
-				if( key && type ){
-					var value = self.data[key];
-					if( value && value.constructor != type )
-						validation = false;
-				}
+			$.each(this._validation, function( field, type ){
+				var value = self.data[field];
+				if( value && value.constructor != type )
+					validation = false;
 			});
 
 			return validation;
