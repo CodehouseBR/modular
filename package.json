@@ -10,7 +10,21 @@
     "type": "git",
     "url": "git://github.com/CodehouseBR/modular.git"
   },
-  "author": "Judson Silva & Gabriel Rubens",
+
+  "authors": [
+    {
+      "name": "Gabriel Rubens",
+      "email": "grsabreu@gmail.com",
+      "url": "http://github.com/grsabreu"
+    },
+
+    {
+      "name": "Judson Silva",
+      "email": "judsonbarroso@gmail.com",
+      "url": "http://github.com/judsonbsilva"
+    }    
+  ],
+
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CodehouseBR/modular/issues"

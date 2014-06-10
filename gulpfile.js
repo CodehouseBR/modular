@@ -14,7 +14,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-	return domSrc({ file:'index.html', selector: 'script', attribute: 'src' })
+	return domSrc({ file: 'index.html', selector: 'script', attribute: 'src' })
 		.pipe(concat('app.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/src/'));
@@ -40,4 +40,4 @@ gulp.task('html', function() {
 		.pipe(gulp.dest('dist/'));
 });
 
-gulp.task('build', ['css','js','html']);
+gulp.task('build', ['css','js','html']); 
