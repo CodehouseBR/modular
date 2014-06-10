@@ -2,7 +2,7 @@
   "name": "modular",
   "version": "0.0.0",
   "description": "Sistema de automação escolar",
-  "main": "view/index.html",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

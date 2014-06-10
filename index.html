@@ -24,7 +24,6 @@
 						<ul class='dropdown-menu'>
 							<li><a href='#'>Matricular</a></li>
 							<li><a href='#'>Procurar</a></li>
-							<li><a href='#'>Notificar</a></li>
 						</ul>
 					</li>
 					<li class='dropdown'>
@@ -55,22 +54,17 @@
 			</div>
 		</div>
 	</nav>
-	<header id='header-index'>
-		<div class='jumbotron'>
-			<h1>Modular <p class='lead'>Bem vindo</p></h1>
-		</div>
-	</header>
-	<div id='content-index' class='content'>
+	<div class='content'>
 		<div ui-view></div>
 	</div>
 
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
-<script src="lib/jquery/dist/jquery.js"></script>
-<script src="lib/pouchdb/dist/pouchdb-nightly.js"></script>
-<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-<script src="lib/angular/angular.js"></script>
-<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src='lib/jquery/dist/jquery.js'></script>
+<script src='lib/pouchdb/dist/pouchdb-nightly.js'></script>
+<script src='lib/bootstrap/dist/js/bootstrap.js'></script>
+<script src='lib/angular/angular.js'></script>
+<script src='lib/angular-ui-router/release/angular-ui-router.js'></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -80,7 +74,7 @@
 <!-- endbuild -->
 
 <!-- build:js scripts/app.js -->
-<script src='src/resource.js'></script>
+<script src='src/model.js'></script>
 <script src='src/session.js'></script>
 <script src='src/user.js'></script>
 <script src='src/app.js'></script>
