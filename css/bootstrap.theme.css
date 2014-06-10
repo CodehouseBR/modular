@@ -65,12 +65,11 @@
 	display: inline-block;
 	border-radius: 50%;
 }
-
+#container-content { margin-top: 50px }
 #navbar-top .navbar-brand { padding-top: 0 }
 
 #header-index .jumbotron {
-	padding-top: 60px;
-	padding-bottom: 20px;
+	padding: 20px;
 	margin-bottom: 15px;
 }
 

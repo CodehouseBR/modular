@@ -1,8 +1,8 @@
 function User(fields){
-	//Extends Resource
-	Resource.call(this, 'user', fields);
+	//Extends Model
+	Model.call(this, 'user', fields);
 }
-User.prototype = Object.create( Resource.prototype );
+User.prototype = Object.create( Model.prototype );
 User.constructor = User;
 User.prototype.login = function(email, password, callback){
 	var self = this;

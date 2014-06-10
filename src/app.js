@@ -12,12 +12,10 @@
 				url: '/home',
 				templateUrl: 'view/home/home.html'
 			})
-
 			.state('settings', {
 				url: '/settings',
 				templateUrl: 'view/home/settings.html'
 			})
-
 			// Students routes
 			.state('students', {
 				url: '/students',
@@ -59,17 +57,25 @@
 		this.welcome = "Bem-vindo, usuário";
 	});
 
-	var Student = new Resource('student',{
+	var Student = new Model('student',{
 		name: String,
-		years: Number,
-		birthdate: Date
+		mother: String,
+		father: String,
+		age: Number,
+		birthdate: Date,
+		actived: Boolean,
+		schoolClass: Number
 	});
 
-	var SchoolClass = new Resource('schoolclass',{
+	Student.event('before','validate', function(data){
+		//Code here
+	});
+
+	var SchoolClass = new Model('schoolclass',{
 
 	});
 
-	var Teacher = new Resource('teacher',{
+	var Teacher = new Model('teacher',{
 		name: String
 	});
 
@@ -93,11 +99,11 @@
 
 	});
 
-	var Discipline = new Resource('discipline',{
+	var Discipline = new Model('discipline',{
 
 	});
 
-	var Notification = new Resource('notification',{
+	var Notification = new Model('notification',{
 
 	});
 })()

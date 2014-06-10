@@ -1,4 +1,4 @@
-(function(window, $, View, db){
+(function(window, $, db){
 	
 	function Model( name, fields ){
 		//If DB error
@@ -11,8 +11,6 @@
 		self.data = {};
 		//instance of DB
 		self.db = db;
-		//the view
-		self.view = new View(name, self);
 		//events
 		self.events = { after:{}, before:{}, on:{} };
 		//fields to validate input of data
@@ -27,6 +25,9 @@
 		_makeId: function(){
 			return ((( new Date() ).getTime() + Math.random() ) * 10000 ).toString();
 		},
+		exists: function( id ){
+			//this.find({ condition: {_id: id}}, function)
+		},
 		//New instance
 		create: function(){
 			this.data = { _id: this._makeId(), $type: this.name };
@@ -35,9 +36,11 @@
 		callEvent:function(when, name, context, args){
 			var event = this.events[when][name];
 			if( event && event.length > 0 ){
+				var toReturn = [];
 				event.forEach(function(action){
-					action.apply(context, args);
+					toReturn.push( action.apply(context, args) );
 				});
+				return toReturn.length <= 1 ? toReturn[0]: toReturn;
 			} else return true;
 		},
 		//Get an Set data to save
@@ -59,7 +62,8 @@
 		},
 		//Validate data
 		validate:function(){
-			if(!this._validation) return true;
+			if( !this.callEvent('before','validate',this, [this.data, this._validation]) ) return false;
+			if( !this._validation) return true;
 
 			var self = this,
 				validation = true;
@@ -122,4 +126,4 @@
 
 	window.Model = Model;
 	
-})(window, jQuery, View, new PouchDB('modular') );
+})(window, jQuery, new PouchDB('modular') );
