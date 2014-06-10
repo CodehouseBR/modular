@@ -10,21 +10,18 @@
     "type": "git",
     "url": "git://github.com/CodehouseBR/modular.git"
   },
-
   "authors": [
     {
       "name": "Gabriel Rubens",
       "email": "grsabreu@gmail.com",
       "url": "http://github.com/grsabreu"
     },
-
     {
       "name": "Judson Silva",
       "email": "judsonbarroso@gmail.com",
       "url": "http://github.com/judsonbsilva"
-    }    
+    }
   ],
-
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CodehouseBR/modular/issues"
@@ -45,5 +42,8 @@
     "gulp-jshint": "^1.6.1",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^0.3.0"
+  },
+  "dependencies": {
+    "wiredep": "~1.7.3"
   }
 }

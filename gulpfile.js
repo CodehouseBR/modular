@@ -41,3 +41,21 @@ gulp.task('html', function() {
 });
 
 gulp.task('build', ['css','js','html']); 
+
+// inject bower components
+gulp.task('wiredep', function () {
+	var wiredep = require('wiredep').stream;
+
+	gulp.src('css/*.css')
+		.pipe(wiredep({
+			directory: 'lib/'
+		}))
+		.pipe(gulp.dest('app/styles'));
+
+	gulp.src('./index.html')
+		.pipe(wiredep({
+			directory: 'lib/',
+			exclude: ['bootstrap-sass-official']
+		}))
+		.pipe(gulp.dest('./'));
+});
