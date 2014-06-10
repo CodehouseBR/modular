@@ -14,7 +14,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-	return domSrc({ file:'index.html', selector: 'script', attribute: 'src' })
+	return domSrc({ file: 'index.html', selector: 'script', attribute: 'src' })
 		.pipe(concat('app.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/src/'));
@@ -40,4 +40,22 @@ gulp.task('html', function() {
 		.pipe(gulp.dest('dist/'));
 });
 
-gulp.task('build', ['css','js','html']);
+gulp.task('build', ['css','js','html']); 
+
+// inject bower components
+gulp.task('wiredep', function () {
+	var wiredep = require('wiredep').stream;
+
+	gulp.src('css/*.css')
+		.pipe(wiredep({
+			directory: 'lib/'
+		}))
+		.pipe(gulp.dest('app/styles'));
+
+	gulp.src('view/index.html')
+		.pipe(wiredep({
+			directory: 'lib/',
+			exclude: ['bootstrap-sass-official']
+		}))
+		.pipe(gulp.dest('./'));
+});

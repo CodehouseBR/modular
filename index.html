@@ -5,110 +5,105 @@
 	<title>Modular | Automação Escolar</title>
 </head>
 <body>
-	<div class='container-fluid'>
-		<div class='row'>
-			<!-- Barra lateral -->
-			<div class='col-sm-3 col-md-2 sidebar'>
-				<img src='img/logo.png' class='img-responsive'>
-				<hr>
-				<ul class='nav nav-sidebar'>
-					<li class='active'><a href='#'><span class='glyphicon glyphicon-home'></span> Início</a></li>
-					<li><a href='#'><span class='glyphicon glyphicon-user'></span> Cadastro</a></li>
-					<li><a href='#'><span class='glyphicon glyphicon-ok-circle'></span> Chamada</a></li>
-					<li><a href='#'><span class='glyphicon glyphicon-folder-open'></span> Boletim</a></li>
-					<li><a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span> Notificações</a></li>
-					<li><a href='#'><span class='glyphicon glyphicon-cog'></span> Configurações</a></li>
-				</ul>
-				<!-- <ul class='nav nav-sidebar'>
-					<li><a href=''>Nav item</a></li>
-					<li><a href=''>Nav item again</a></li>
-				</ul>-->
+	<nav class='navbar navbar-inverse navbar-fixed-top' role='navigation'>
+		<div class='container-fluid'>
+			 <div class='navbar-header'>
+				<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbar-links'>
+					<span class='sr-only'>Toggle navigation</span>
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+				</button>
+				<a class='navbar-brand' href='#'>Modular</a>
 			</div>
-			<!-- Parte principal -->
-			<div class='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-				<!-- Navbar top-->
-				<div class='navbar navbar-inverse navbar-static-top' role='navigation'>
-					<div class='container-fluid'>
-						<div class='navbar-header'>
-							<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
-								<span class='sr-only'>Toggle navigation</span>
-								<span class='icon-bar'></span>
-								<span class='icon-bar'></span>
-								<span class='icon-bar'></span>
-							</button>
-						</div>
-						<div class='navbar-collapse collapse'>
-							<ul class='nav navbar-nav navbar-right'>
-								<li><a href='#'>Turmas</a></li>
-								<li><a href='#'>Alunos</a></li>
-								<li><a href='#'>Professores</a></li>
-								<li><a href='#'>Horários</a></li>
-								<li class='dropdown'>
-									<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Ações</a>
-									<ul class='dropdown-menu'>
-										<li><a href='#'>Configurações</a></li>
-										<li><a href='#'>Sair</a></li>
-									</ul>
-								</li>
-							</ul>
-							<!-- <form class='navbar-form navbar-right'>
-								<input type='text' class='form-control' placeholder='Search...'>
-							</form> -->
-						</div>
+			<div class='collapse navbar-collapse' id='navbar-links'>
+				<ul class='nav navbar-nav'>
+					<li class='active'><a href='#'>Início</a></li>
+					<li><a href='#'>Alunos</a></li>
+					<li><a href='#'>Turmas</a></li>
+					<li><a href='#'>Professores</a></li>
+					<li><a href='#'>Configurações</a></li>
+					<li><a href='#'>Ações</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<header>
+		<div class='jumbotron'>
+			<h1>Modular <p class='lead'>Bem vindo</p></h1>
+		</div>
+	</header>
+	<div id='content-index' class='content'>
+		<div class='container-fluid'>
+			<div class='row'>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
+						</button>
 					</div>
 				</div>
-				<!-- Content -->
-				<div class='container-fluid'>
-					<div id='view-container' class='content'>
-						<h1 class='page-header'>Alunos</h1>
-						<div class='row placeholders'>
-							<div class='col-xs-6 col-sm-3 placeholder'>
-								<img data-src='holder.js/200x200/auto/sky' class='img-responsive' alt='Generic placeholder thumbnail'>
-								<h4>Label</h4>
-								<span class='text-muted'>Something else</span>
-							</div>
-							<div class='col-xs-6 col-sm-3 placeholder'>
-								<img data-src='holder.js/200x200/auto/vine' class='img-responsive' alt='Generic placeholder thumbnail'>
-								<h4>Label</h4>
-								<span class='text-muted'>Something else</span>
-							</div>
-							<div class='col-xs-6 col-sm-3 placeholder'>
-								<img data-src='holder.js/200x200/auto/sky' class='img-responsive' alt='Generic placeholder thumbnail'>
-								<h4>Label</h4>
-								<span class='text-muted'>Something else</span>
-							</div>
-							<div class='col-xs-6 col-sm-3 placeholder'>
-								<img data-src='holder.js/200x200/auto/vine' class='img-responsive' alt='Generic placeholder thumbnail'>
-								<h4>Label</h4>
-								<span class='text-muted'>Something else</span>
-							</div>
-						</div>
-
-						<h2 class='sub-header'>Lista de alunos</h2>
-						<div>
-							<ul>
-								<li><h3>Estudante</h3></li>
-							</ul>
-						</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-asterisk'></span><br/>Description</a>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+	
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/pouchdb/dist/pouchdb-nightly.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-<!--Include libs -->
-<script src='lib/pouchdb/dist/pouchdb-nightly.min.js'></script>
-<script src='lib/jquery/dist/jquery.min.js'></script>
-<script src='lib/handlebars/handlebars.min.js'></script>
-<link rel='stylesheet' type='text/css' href='lib/bootstrap/dist/css/bootstrap.min.css'>
-<!-- The magic -->
+<!-- build:css css/main.css -->
 <link rel='stylesheet' type='text/css' href='css/bootstrap.theme.css'>
+<link rel='stylesheet' type='text/css' href='lib/bootstrap/dist/css/bootstrap.min.css'>
+<!-- endbuild -->
+
+<!-- build:js scripts/app.js -->
 <script src='src/helper.js'></script>
 <script src='src/view.js'></script>
 <script src='src/resource.js'></script>
 <script src='src/session.js'></script>
 <script src='src/user.js'></script>
 <script src='src/app.js'></script>
+<!-- endbuild -->
 </body>
 </html>

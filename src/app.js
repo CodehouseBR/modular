@@ -1,32 +1,39 @@
-//Set resources
+"use strict;"
 
-Student = new Resource('student',{
-	name: String,
-	years: Number,
-	birthdate: Date
-});
-SchoolClass = new Resource('schoolclass',{
-		
-});
-Teacher = new Resource('teacher',{
+(function(){
+	var app = angular.module('modular', ['ui.router']);
 
-});
-User = new User({
+	app.config(function( $stateProvider, $routeProvider ){
+		$routeProvider.otherwise('/');
+	});
+	
+	app.controller('AppController', function(){
+		this.welcome = "Bem-vindo, usuário";
+	});
 
-});
-Discipline = new Resource('discipline',{
+	Student = new Resource('student',{
+		name: String,
+		years: Number,
+		birthdate: Date
+	});
 
-});
-Notification = new Resource('notification',{
+	SchoolClass = new Resource('schoolclass',{
 
-});
+	});
 
-App = {
-	init: function(){
-		//Helper.file.read()
+	Teacher = new Resource('teacher',{
 
-	},
-	logged: function(){
-		
-	}
-}
+	});
+
+	User = new User({
+
+	});
+
+	Discipline = new Resource('discipline',{
+
+	});
+
+	Notification = new Resource('notification',{
+
+	});
+})()
