@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Modular | Automação Escolar</title>
+</head>
+<body>
+	<nav id='navbar-top' class='navbar navbar-inverse navbar-fixed-top' role='navigation'>
+		<div class='container-fluid'>
+			 <div class='navbar-header'>
+				<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbar-links'>
+					<span class='sr-only'>Toggle navigation</span>
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+				</button>
+				<a class='navbar-brand' href='#'><img src='../img/logo-min.png'/></a>
+			</div>
+			<div class='collapse navbar-collapse' id='navbar-links'>
+				<ul class='nav navbar-nav navbar-right'>
+					<li class='active'><a href='#'>Início</a></li>
+					<li class='dropdown'>
+						<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Alunos <b class='caret'></b></a>
+						<ul class='dropdown-menu'>
+							<li><a href='#'>Matricular</a></li>
+							<li><a href='#'>Procurar</a></li>
+							<li><a href='#'>Notificar</a></li>
+						</ul>
+					</li>
+					<li><a href='#'>Turmas</a></li>
+					<li><a href='#'>Professores</a></li>
+					<li><a href='#'>Configurações</a></li>
+					<li><a href='#'>Ações</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<header id='header-index'>
+		<div class='jumbotron'>
+			<h1>Modular <p class='lead'>Bem vindo</p></h1>
+		</div>
+	</header>
+	<div id='content-index' class='content'>
+		<div class='container-fluid'>
+			<div class='row'>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-user'></span><br/>Matricular aluno</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-user'></span><br/>Cadastrar professor</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-search'></span><br/>Procurar aluno</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon glyphicon-file'></span><br/>Cadastrar disciplina</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span><br/>Notificar aluno</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-sort'></span><br/>Estatísticas</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-edit'></span><br/>Atribuir notas</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-usd'></span><br/>Finanças</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-plus-sign'></span><br/>Criar turma</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-user'></span><br/>Cadastrar usuário</a>
+						</button>
+					</div>
+				</div>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-th-list'></span><br/>Listar turmas</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-wrench'></span><br/>Configurações</a>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src='../lib/jquery/dist/jquery.js'></script>
+<script src='../lib/pouchdb/dist/pouchdb-nightly.js'></script>
+<script src='../lib/bootstrap/dist/js/bootstrap.js'></script>
+<script src='../lib/angular/angular.js'></script>
+<script src='../lib/angular-ui-router/release/angular-ui-router.js'></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:css css/main.css -->
+<link rel='stylesheet' type='text/css' href='../lib/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' type='text/css' href='../css/bootstrap.theme.css'>
+<!-- endbuild -->
+
+<!-- build:js scripts/app.js -->
+<script src='../src/helper.js'></script>
+<script src='../src/view.js'></script>
+<script src='../src/resource.js'></script>
+<script src='../src/session.js'></script>
+<script src='../src/user.js'></script>
+<script src='../src/app.js'></script>
+<!-- endbuild -->
+<script type='text/javascript'>
+var colors = ["#f00", "#fd2911", "#fc5409", "#fa9b01", "#fabd03", "#d1eb2a", "#67b231", "#0097bc", "#0247fc", "#3e01a4", "#8601b0", "#d5257a"];
+$('.btn-circle').each(function(i, node){
+	$(node).css('background-color', colors[i]);
+})
+</script>
+</body>
+</html>

@@ -52,7 +52,7 @@ gulp.task('wiredep', function () {
 		}))
 		.pipe(gulp.dest('app/styles'));
 
-	gulp.src('./index.html')
+	gulp.src('view/index.html')
 		.pipe(wiredep({
 			directory: 'lib/',
 			exclude: ['bootstrap-sass-official']

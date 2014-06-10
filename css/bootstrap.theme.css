@@ -66,13 +66,20 @@
 	border-radius: 50%;
 }
 
+#navbar-top .navbar-brand { padding-top: 0 }
+
+#header-index .jumbotron {
+	padding-top: 60px;
+	padding-bottom: 20px;
+	margin-bottom: 15px;
+}
+
 #content-index .circle { width:100% }
 #content-index .circle .btn-circle {
-	margin:5px 5%;
+	margin:20px 5%;
 	width: 90%;
 	height:150px;
 	border:none;
-	//border-radius: 100%;
 	background:#f00;
 }
 #content-index .btn-circle a {
