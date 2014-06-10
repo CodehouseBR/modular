@@ -5,79 +5,86 @@
 </header>
 <div id='content-index'>
 	<div class='container-fluid'>
-		<div class='row'>
-			<div class='col-md-2'>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-user'></span><br/>Matricular aluno</a>
-					</button>
+			<div class='row'>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a ui-sref='students.add'><span class='glyphicon glyphicon-user'></span><br/>Matricular aluno</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a ui-sref='teachers.add'><span class='glyphicon glyphicon-user'></span><br/>Cadastrar professor</a>
+						</button>
+					</div>
 				</div>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-user'></span><br/>Cadastrar professor</a>
-					</button>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a ui-sref='students.search'><span class='glyphicon glyphicon-search'></span><br/>Procurar aluno</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon glyphicon-file'></span><br/>Cadastrar disciplina</a>
+						</button>
+					</div>
 				</div>
-			</div>
-			<div class='col-md-2'>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-search'></span><br/>Procurar aluno</a>
-					</button>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a ui-sref='students.notify'><span class='glyphicon glyphicon-exclamation-sign'></span><br/>Notificar aluno</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-sort'></span><br/>Estatísticas</a>
+						</button>
+					</div>
 				</div>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon glyphicon-file'></span><br/>Cadastrar disciplina</a>
-					</button>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-edit'></span><br/>Atribuir notas</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-usd'></span><br/>Finanças</a>
+						</button>
+					</div>
 				</div>
-			</div>
-			<div class='col-md-2'>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span><br/>Notificar aluno</a>
-					</button>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-plus-sign'></span><br/>Criar turma</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-user'></span><br/>Gerenciar usuários</a>
+						</button>
+					</div>
 				</div>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-sort'></span><br/>Estatísticas</a>
-					</button>
-				</div>
-			</div>
-			<div class='col-md-2'>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-edit'></span><br/>Atribuir notas</a>
-					</button>
-				</div>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-usd'></span><br/>Finanças</a>
-					</button>
-				</div>
-			</div>
-			<div class='col-md-2'>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-plus-sign'></span><br/>Criar turma</a>
-					</button>
-				</div>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-user'></span><br/>Cadastrar usuário</a>
-					</button>
-				</div>
-			</div>
-			<div class='col-md-2'>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-th-list'></span><br/>Listar turmas</a>
-					</button>
-				</div>
-				<div class='circle'>
-					<button class='btn-circle'>
-						<a href='#'><span class='glyphicon glyphicon-wrench'></span><br/>Configurações</a>
-					</button>
+				<div class='col-md-2'>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-th-list'></span><br/>Listar turmas</a>
+						</button>
+					</div>
+					<div class='circle'>
+						<button class='btn-circle'>
+							<a href='#'><span class='glyphicon glyphicon-wrench'></span><br/>Configurações</a>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script type='text/javascript'>
+var colors = ["#f00", "#fd2911", "#fc5409", "#fa9b01", "#fabd03", "#d1eb2a", "#67b231", "#0097bc", "#0247fc", "#3e01a4", "#8601b0", "#d5257a"];
+$('.btn-circle').each(function(i, node){
+	$(node).css('background-color', colors[i]);
+})
+</script>

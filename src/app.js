@@ -7,14 +7,50 @@
 		$urlRouterProvider.otherwise('/home');
 
 		$stateProvider
+			// App routes
 			.state('home', {
 				url: '/home',
 				templateUrl: 'view/home/home.html'
 			})
+			.state('settings', {
+				url: '/settings',
+				templateUrl: 'view/home/settings.html'
+			})
+			// Students routes
 			.state('students', {
 				url: '/students',
-				templateUrl: 'view/students/index.html'
-			});
+				templateUrl: 'view/students/layout.html'
+			})
+				.state('students.add', {
+					url: '/add',
+					templateUrl: 'view/students/add.html'
+				})
+
+				.state('students.search', {
+					url: '/search',
+					templateUrl: 'view/students/search.html'
+				})
+
+				.state('students.notify', {
+					url: '/notify',
+					templateUrl: 'view/students/notify.html'
+				})
+
+			// Teachers routes
+			.state('teachers', {
+				url: '/teachers',
+				templateUrl: 'view/teachers/layout.html',
+				controller: 'TeacherController'
+			})
+				.state('teachers.add', {
+					url: '/add',
+					templateUrl: 'view/teachers/add.html'
+				})
+
+				.state('teachers.search', {
+					url: '/search',
+					templateUrl: 'view/teachers/search.html'
+				});
 	});
 
 	app.controller('AppController', function(){
@@ -40,7 +76,16 @@
 	});
 
 	var Teacher = new Model('teacher',{
+		name: String
+	});
 
+	app.controller('TeacherController', function($scope){
+		$scope.teacher = {};
+		
+		$scope.save = function( teacher ){
+			Teacher.save( teacher );
+			$scope.teacher = {};
+		}
 	});
 
 	var user = new User({

@@ -27,7 +27,7 @@
 		},
 		exists: function( id ){
 			//this.find({ condition: {_id: id}}, function)
-		}
+		},
 		//New instance
 		create: function(){
 			this.data = { _id: this._makeId(), $type: this.name };
