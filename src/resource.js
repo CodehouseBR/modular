@@ -29,6 +29,8 @@
 		create: function(){
 			this.data = { _id: this._makeId(), $type: this.name };
 			this.callEvent('after','create',this, this.data);
+
+			return this;
 		},
 		callEvent:function(when, name, context, args){
 			var event = this.events[when][name];

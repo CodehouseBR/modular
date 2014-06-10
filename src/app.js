@@ -75,9 +75,16 @@
 
 	app.controller('TeacherController', function($scope){
 		$scope.teacher = {};
-		
+		$scope.teachers = {};
+
+		$scope.getTeachers = function(){
+			Teacher.find({ name: '' }, function(err, response){
+				$scope.teachers = response.rows;
+			});
+		}
+
 		$scope.save = function( teacher ){
-			Teacher.save( teacher );
+			Teacher.create().save( teacher );
 			$scope.teacher = {};
 		}
 	});
