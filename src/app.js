@@ -1,39 +1,50 @@
-"use strict;"
+"use strict";
 
 (function(){
 	var app = angular.module('modular', ['ui.router']);
 
-	app.config(function( $stateProvider, $routeProvider ){
-		$routeProvider.otherwise('/');
+	app.config(function( $stateProvider, $urlRouterProvider ){
+		$urlRouterProvider.otherwise('/home');
+
+		$stateProvider
+			.state('home', {
+				url: '/home',
+				templateUrl: 'view/home/home.html'
+			})
+
+			.state('students', {
+				url: '/students',
+				templateUrl: 'view/students/index.html'
+			});
 	});
-	
+
 	app.controller('AppController', function(){
 		this.welcome = "Bem-vindo, usuário";
 	});
 
-	Student = new Resource('student',{
+	var Student = new Resource('student',{
 		name: String,
 		years: Number,
 		birthdate: Date
 	});
 
-	SchoolClass = new Resource('schoolclass',{
+	var SchoolClass = new Resource('schoolclass',{
 
 	});
 
-	Teacher = new Resource('teacher',{
+	var Teacher = new Resource('teacher',{
 
 	});
 
-	User = new User({
+	var user = new User({
 
 	});
 
-	Discipline = new Resource('discipline',{
+	var Discipline = new Resource('discipline',{
 
 	});
 
-	Notification = new Resource('notification',{
+	var Notification = new Resource('notification',{
 
 	});
 })()

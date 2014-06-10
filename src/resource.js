@@ -1,4 +1,4 @@
-(function(window, $, View, db){
+(function(window, $, db){
 	
 	function Resource( name, fields ){
 		//If DB error
@@ -11,8 +11,6 @@
 		self.data = {};
 		//instance of DB
 		self.db = db;
-		//the view
-		self.view = new View(name, self);
 		//events
 		self.events = { after:{}, before:{}, on:{} };
 		//fields to validate input of data
@@ -122,4 +120,4 @@
 
 	window.Resource = Resource;
 	
-})(window, jQuery, View, new PouchDB('modular') );
+})(window, jQuery, new PouchDB('modular') );
