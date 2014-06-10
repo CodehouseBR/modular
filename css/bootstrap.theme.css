@@ -65,3 +65,21 @@
 	display: inline-block;
 	border-radius: 50%;
 }
+
+#content-index .circle { width:100% }
+#content-index .circle .btn-circle {
+	margin:5px 5%;
+	width: 90%;
+	height:150px;
+	border:none;
+	//border-radius: 100%;
+	background:#f00;
+}
+#content-index .btn-circle a {
+	text-decoration: none;
+	color:#fff;
+	font-size: 20px;
+}
+#content-index .btn-circle .glyphicon{
+	font-size: 50px;
+}
