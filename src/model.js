@@ -26,7 +26,23 @@
 			return ((( new Date() ).getTime() + Math.random() ) * 10000 ).toString();
 		},
 		exists: function( id ){
-			//this.find({ condition: {_id: id}}, function)
+			var self = this;
+			function exist(fn, when){
+				self.find({condition: {_id: id}}, function(err, result ){
+					if(result.total_rows >= 1 && when) fn( resul );
+					else if( !when ) fn( err );
+				});
+			}
+			return {
+				yes: function( callback ){
+					exist(callback, true);
+					return this;
+				},
+				not: function( callback){
+					exist(callback, false);
+					return this;
+				}
+			}
 		},
 		//New instance
 		create: function(){

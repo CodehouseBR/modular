@@ -4,12 +4,12 @@ function User(fields){
 }
 User.prototype = Object.create( Model.prototype );
 User.constructor = User;
-User.prototype.login = function(email, password, callback){
+User.prototype.login = function(username, password, callback){
 	var self = this;
-	this.callEvent('before','login', self, [email,password]);
+	this.callEvent('before','login', self, [username,password]);
 	self.find({
 		conditions:{
-			email: email,
+			username: username,
 			password:password
 		}
 	}, function(err, result){
@@ -22,8 +22,8 @@ User.prototype.login = function(email, password, callback){
 	});
 };
 
-User.current = User.prototype.current = function(){
-	return Session.get('logged');
+User.isLogged = User.prototype.isLogged = function(){
+	return !!Session.get('logged');
 };
 User.prototype.logout = function(){
 	this.callEvent('before','logout', self, [Session.get('logged')]);
