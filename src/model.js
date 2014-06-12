@@ -23,13 +23,22 @@
 	};
 
 	Model.prototype = {
+		
 		constructor: Model,
+		
 		_findTypes:{
 			//Here map functions
 		},
+		
 		_makeId: function(){
 			return ((( new Date() ).getTime() + Math.random() ) * 10000 ).toString();
 		},
+
+		/**
+		 * Checks the existance of a entry in the database
+		 * @param  {integer} id
+		 * @return {Promise}
+		 */
 		exists: function( id ){
 			var self = this;
 			function exist(fn, when){
@@ -44,11 +53,22 @@
 				exist(reject, false);
 			});
 		},
+
 		create: function(){
 			this.data = { _id: this._makeId(), $type: this.name };
-			this.callEvent('after','create',this, this.data);
+			this.trigger('after', 'create', this, this.data);
 		},
-		callEvent:function(when, name, context, args){
+
+		/**
+		 * Oh, this is pretty cool. 
+		 * 	Triggers events saved when a event occurs.  
+		 * @param  {string} when
+		 * @param  {string} name - Event name
+		 * @param  {Model} context - Model instance to contextualize the event
+		 * @param  {array} args
+		 * @return {boolean}
+		 */
+		trigger: function(when, name, context, args){
 			var event = this.events[when][name];
 			if( event && event.length > 0 ){
 				var toReturn = [];
@@ -58,13 +78,23 @@
 				return toReturn.length <= 1 ? toReturn[0]: toReturn;
 			} else return true;
 		},
-		//Get an Set data to save
+
+		/**
+		 * Set a field of this.data
+		 * @param {string} key
+		 * @param {*} value
+		 */
 		set: function(key, value){
 			if( key.constructor == Object )
 				this.data = $.extend(this.data, key);
 			else this.data[key] = value;
 		},
-		//Get data on this 
+
+		/**
+		 * Get a value from a field of this.data
+		 * @param  {string} key
+		 * @return {*}
+		 */
 		get: function(key){
 			if( key.constructor == Array ){
 				var toReturn = {},
@@ -75,15 +105,21 @@
 				return toReturn;
 			} else return this.data[key];
 		},
-		//Validate data
-		validate:function(){
-			if( !this.callEvent('before','validate',this, [this.data, this._validation]) ) return false;
-			if( !this._validation) return true;
+
+		/**
+		 * Validate if this.data agree with fields especification in this._validation
+		 * @return {boolean}
+		 */
+		validate: function(){
+			if( !this.trigger('before', 'validate', this, [this.data, this._validation]) ) 
+				return false;
+			if( !this._validation ) 
+				return true;
 
 			var self = this,
 				validation = true;
 			
-			this._validation.forEach(function( key, type ){
+			$.each(this._validation, function( key, type ){
 				if( key && type ){
 					var value = self.data[key];
 					if( value && value.constructor != type )
@@ -93,32 +129,49 @@
 
 			return validation;
 		},
-		//Events: after, before or on action, callback
-		event:function(when, name, action){
-			//If not created, make a list
+
+		/**
+		 * Defines a event that will can be triggered by this.trigger
+		 * @param  {string} when - after, before, during or optional.
+		 * @param  {string} name
+		 * @param  {function} action
+		 */
+		event: function(when, name, action){
+			// If doesn't exist a entry, create one, man!
 			if( !this.events[when].hasOwnProperty(name) ){
 				this.events[when][name] = [];
 			}
 			this.events[when][name].push(action);
 		},
-		//To save data
-		save:function( data ){
+		
+		/**
+		 * That's the important part: Save a entry to database
+		 * @param  {object} data
+		 */
+		save: function( data ){
+			if( !this.data._id ) this.create();
+
 			var self = this;
-			//if argument exists, extend data;
+			// If a cached data already exists, let's merge them
 			this.data = data ? $.extend(this.data, data): this.data;
-			//saving
-			if( this.validate() && this.callEvent('before', 'save', self, [self.data]) ){
+			
+			// Tan dan
+			if( this.validate() && this.trigger('before', 'save', self, [self.data]) ){
 				console.log(self.data);
 				this.db.put(self.data, function(err,resp){
 					console.log('Saved!', err, resp);
-					self.callEvent('after','save', self, [resp]);
+					self.trigger('after','save', self, [resp]);
 				});
 			}
 		},
-		//Search values
+
+		/**
+		 * Search for pieces of data in the database
+		 * @param  {object}   options
+		 * @param  {Function} callback
+		 */
 		find: function(options, callback){
 			var name = this.name;
-			//options.condition
 			this.db.query(function(doc, emit){
 				var get = true;
 				if( options.condition ){
