@@ -7,7 +7,7 @@
 	 */
 	function Model( name, fields ){
 		// If DB error
-		if(!db) throw "Error to access DataBase";
+		if(!db) Error('Error to access DataBase');
 
 		var self = this;
 		self.name = name;
