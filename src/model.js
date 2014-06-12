@@ -1,12 +1,17 @@
 (function(window, $, db){
-	
+	/**
+	 * Creates a Model representation in PouchDB
+	 * @constructor 
+	 * @param {string} name
+	 * @param {object} fields
+	 */
 	function Model( name, fields ){
-		//If DB error
+		// If DB error
 		if(!db) throw "Error to access DataBase";
-		//Atributes
+
 		var self = this;
-		//table's name
 		self.name = name;
+
 		//data to save
 		self.data = {};
 		//instance of DB
@@ -33,18 +38,12 @@
 					else if( !when ) fn( err );
 				});
 			}
-			return {
-				yes: function( callback ){
-					exist(callback, true);
-					return this;
-				},
-				not: function( callback){
-					exist(callback, false);
-					return this;
-				}
-			}
+
+			return new Promise(function(resolve, reject){
+				exist(resolve, true);
+				exist(reject, false);
+			});
 		},
-		//New instance
 		create: function(){
 			this.data = { _id: this._makeId(), $type: this.name };
 			this.callEvent('after','create',this, this.data);
