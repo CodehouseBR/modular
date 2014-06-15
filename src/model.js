@@ -1,19 +1,26 @@
 (function(window, $, db){
 	
+/**
+ * Model do access DB.
+ * @constructor
+ * @param {string} name - The collection name.
+ * @param {object} fields - Collection fields to validation.
+ */
 	function Model( name, fields ){
 		//If DB error
 		if(!db) throw "Error to access DataBase";
-		//Atributes
+		
 		var self = this;
-		//table's name
+		// Atributes
+			//table's name
 		self.name = name;
-		//data to save
+			//data to save
 		self.data = {};
-		//instance of DB
+			//instance of DB
 		self.db = db;
-		//events
+			//events
 		self.events = { after:{}, before:{}, on:{} };
-		//fields to validate input of data
+			//fields to validate input of data
 		self._validation = fields || false;
 	};
 
@@ -48,6 +55,7 @@
 		create: function(){
 			this.data = { _id: this._makeId(), $type: this.name };
 			this.callEvent('after','create',this, this.data);
+			return this;
 		},
 		callEvent:function(when, name, context, args){
 			var event = this.events[when][name];
