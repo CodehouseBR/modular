@@ -74,7 +74,7 @@
 
 	}).run(function ($rootScope, $state){
 		//Before render views
-		$rootScope.$on('$stateChangeStart', function (event, nextState){
+		$rootScope.$on('$stateChangeStart', function(event, nextState){
 			if( !User.isLogged() && nextState.name != 'users.login' ){
 				event.preventDefault();
 				$state.go('users.login');
@@ -86,7 +86,7 @@
 		this.welcome = "Bem-vindo, usuário";
 	});
 
-	/*- Users -*/
+	/* Users */
 	var currentUser = new User();
 
 	app.controller('UserController', function($scope, $state){
@@ -96,6 +96,7 @@
 			});
 		}
 	});
+
 	var Student = new Model('student',{
 		name: String,
 		mother: String,

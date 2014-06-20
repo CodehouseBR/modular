@@ -1,9 +1,20 @@
+/**
+ * User Model
+ * @constructor
+ * @param {object} fields
+ */
 function User(fields){
-	//Extends Model
+	// Extends Model
 	Model.call(this, 'user', fields);
 }
+//Extends Model
 User.prototype = Object.create( Model.prototype );
-User.constructor = User;
+/**
+ * To login in system
+ * @param {string} userName
+ * @param {string} password
+ * @param {function} callback
+ */
 User.prototype.login = function(username, password, callback){
 	var self = this;
 	this.callEvent('before','login', self, [username,password]);
@@ -21,10 +32,16 @@ User.prototype.login = function(username, password, callback){
 		} else callback.call(self, "Usuário ou senha inválidos");
 	});
 };
-
+/**
+ * User status now 
+ * @return {boolean} isLogged?
+ */
 User.isLogged = User.prototype.isLogged = function(){
 	return !!Session.get('logged');
 };
+/**
+ * To logout of system
+ */
 User.prototype.logout = function(){
 	this.callEvent('before','logout', self, [Session.get('logged')]);
 	Session.set('logged',false);

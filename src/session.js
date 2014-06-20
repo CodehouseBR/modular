@@ -20,15 +20,20 @@
 			return toReturn;
 		}
 
-	function Session(){ this.store = window.localStorage };
+	function Session(){ 
+		this.store = window.localStorage 
+	};
+
 
 	Session.prototype = {
 		constructor: Session,
+
 		//Return respective value
-		get:function( key ){
+		get: function( key ){
 			//If key exists, return data converted in object or function
 			return this.has(key) ? _parseToReturn( this.store.getItem(key), isFx.test(key) ) : null;
 		},
+
 		//Get localStorage
 		getAll: function(){
 			var toReturn = {},
@@ -38,22 +43,26 @@
 			});
 			return toReturn;
 		},
-		//Set key and value
-		set:function( key , value ){
+
+		// Set key and value
+		set: function( key , value ){
 			//Verify if is function, parse value to String and set in localStorage
 			this.store.setItem( key, _parseToStr( value, isFx.test(key) ));
 			return this;
 		},
-		//Has the key?
-		has:function( key ){
+
+		// Has the key?
+		has: function( key ){
 			//key exists?
 			return this.store.hasOwnProperty(key);
 		},
-		//Remove a value
-		remove:function( key ){
+
+		// Remove a value
+		remove: function( key ){
 			this.store.removeItem(key);
 			return this;
 		},
+
 		//Remove all values
 		reset: function(){
 			var self = this;
