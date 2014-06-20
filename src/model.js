@@ -41,16 +41,13 @@
 		 * @return {Promise}
 		 */
 		exists: function( id ){
-			var self = this;
-			function exist(fn, when){
-				self.find({condition: {_id: id}}, function(err, result ){
-					if(result.total_rows >= 1 && when) fn( resul );
-					else if( !when ) fn( err );
-				});
-			}
+			var self = this,
+				id = id || this.data._id;
 			return new Promise(function(resolve, reject){
-				exist(resolve, true);
-				exist(reject, false);
+				self.find({condition: {_id: id}}, function(err, result ){
+					if(result.total_rows >= 1 ) resolve( resul );
+					else reject( err );
+				});
 			});
 		},
 
@@ -172,8 +169,10 @@
 		 * @param  {Function} callback
 		 */
 		find: function(options, callback){
+			// Get this model name to search in pouchDB
 			var name = this.name;
 			this.db.query(function(doc, emit){
+				// Emit this doc?
 				var get = true;
 				if( options.condition ){
 					for( key in options.condition){
@@ -182,14 +181,23 @@
 					}
 				}
 				if( options.fields ){
-					//Code here
+					// Code here
 				}
-				if( get && doc.$type == name ) emit(doc);
-			}, callback);
+				// Emit if validation = true and this type = model.name
+				if( get && doc.$type == name ) emit(doc.$type, doc);
+			},{}, function(err, result){
+				if( !err ){
+					callback(
+						result.rows.map(function(doc, index){
+							return doc.value;
+						})
+					);
+				} else Error(err);
+			});
 		},
-		//Update
+		// Update
 		update:function(){
-			//Core here
+			// Core here
 		}
 	};
 
