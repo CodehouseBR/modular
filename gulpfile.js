@@ -43,7 +43,7 @@ gulp.task('html', function() {
 gulp.task('build', ['css','js','html']); 
 
 // inject bower components
-gulp.task('wiredep', function () {
+gulp.task('wiredep', function (){
 	var wiredep = require('wiredep').stream;
 
 	gulp.src('css/*.css')

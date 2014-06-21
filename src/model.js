@@ -30,7 +30,30 @@
 		_findTypes:{
 			//Here map functions
 		},
-		
+		validationType:{
+			string: function( data ){
+				return data.constructor == String ? true: false;
+			},
+			number: function( data ){
+				return data.constructor == Number && data !== NaN ? true:false;
+			},
+			list: function( data ){
+				return data.constructor == Array ? true: false;
+			},
+			object: function( data ){
+				return typeof data == 'object' ? true: false
+			},
+			date: function( data ){
+				return data.constructor == Date ? true: false
+			},
+			boolean: function( data ){
+				return data.constructor == Boolean ? true: false;
+			}
+		},
+		/**
+		 * Make a random id
+		 * @return {String} Generated id
+		 */
 		_makeId: function(){
 			return ((( new Date() ).getTime() + Math.random() ) * 10000 ).toString();
 		},
@@ -111,12 +134,15 @@
 		validate: function(){
 			if( !this.trigger('before', 'validate', this, [this.data, this._validation]) ) 
 				return false;
-			if( !this._validation ) 
+			if( !this._validation )
 				return true;
 
 			var self = this,
 				validation = true;
-			
+				
+			$.each(this._validation, function(){
+
+			});
 			$.each(this._validation, function( key, type ){
 				if( key && type ){
 					var value = self.data[key];
@@ -134,7 +160,7 @@
 		 * @param  {string} name
 		 * @param  {function} action
 		 */
-		event: function(when, name, action){
+		on: function(when, name, action){
 			// If doesn't exist a entry, create one, man!
 			if( !this.events[when].hasOwnProperty(name) ){
 				this.events[when][name] = [];
