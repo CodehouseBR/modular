@@ -1,5 +1,9 @@
 (function(window, $, db){
 
+	// Regexp to use on model validation
+	var important = /\!/g,
+		increment = /\+/g;
+
 	/**
 	 * Creates a Model representation in PouchDB
 	 * @constructor 
@@ -140,14 +144,18 @@
 			var self = this,
 				validation = true;
 				
-			$.each(this._validation, function(){
-
-			});
-			$.each(this._validation, function( key, type ){
-				if( key && type ){
-					var value = self.data[key];
-					if( value && value.constructor != type )
-						validation = false;
+			$.each(this._validation, function( key , type ){
+				if( important.test(type) ){
+					type = type.replace(important,'');
+					if( data[key] === undefined ) validation = false;
+				}
+				if( increment.test(type) ){
+					type = type.replace(increment, '');
+					//Code here
+				}
+				var typeFn = this.validationType[type];
+				if( typeFn && !typeFn(type) ){
+					validation = false;
 				}
 			});
 
